@@ -23,28 +23,6 @@ class Score(db.Model):
 with app.app_context():
     db.create_all()
 
-@app.route('/check-answer', methods=['POST'])
-def check_answer():
-    data = request.get_json()
-    answers = data.get('answers')
-    username = data.get('username')
-    correct_answers = ['B', 'B', 'B', 'B', 'C', 'C', 'B', 'D', 'C', 'D', 'B', 'C', 'B', 'D', 'D', 'D', 'D', 'D', 'A', 'A']
-    score = 0
-
-    for i in range(len(answers)):
-        if answers[i] is not None and answers[i].strip().upper() == correct_answers[i]:
-            score += 1
-
-    score = score * 5
-
-
-    answers_str = ''.join([answer.strip().upper() if answer else ' ' for answer in answers])
-    new_score = Score(username=username, score=score, answers=answers_str)
-    db.session.add(new_score)
-    db.session.commit()
-
-    return jsonify({'score': score})
-
 @app.route('/api/best-score', methods=['POST'])
 def last_score():
     try:
@@ -79,8 +57,15 @@ def create_score():
         if data is None:
             raise ValueError("No JSON payload provided")
         name = data.get('username')
-        score = data.get('score')
         answers = data.get('answers')
+        correct_answers = ['B', 'B', 'B', 'B', 'C', 'C', 'B', 'D', 'C', 'D', 'B', 'C', 'B', 'D', 'D', 'D', 'D', 'D', 'A', 'A']
+        score = 0
+
+        for i in range(len(answers)):
+            if answers[i] is not None and answers[i].strip().upper() == correct_answers[i]:
+                score += 1
+
+        score = score * 5
         answers_str = ''.join([answer.strip().upper() if answer else ' ' for answer in answers])
 
         if not name or score is None:

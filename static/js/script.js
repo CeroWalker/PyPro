@@ -82,7 +82,7 @@ form.addEventListener("submit", function (e) {
     }
   });
 
-  fetch("http://127.0.0.1:5000/check-answer", {
+  fetch("http://127.0.0.1:5000/api/score", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -92,22 +92,6 @@ form.addEventListener("submit", function (e) {
       answers: answers,
     }),
   })
-    .then((response) => response.json())
-    .then((data) => {
-      const score = data.score;
-
-      return fetch("http://127.0.0.1:5000/api/score", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username: username,
-          score: score,
-          answers: answers,
-        }),
-      });
-    })
     .then((response) => response.json())
     .then((data) => {
       document.getElementById("quiz").style.display = "none";
