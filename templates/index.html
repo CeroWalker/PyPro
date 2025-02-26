@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Quiz</title>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="bg-gray-100 font-sans">
+    <form>
+    <div id="quiz" class="container mx-auto p-6 bg-white rounded-lg shadow-md max-w-2xl mt-10">
+
+        <div class="mb-6">
+            <label for="username" class="block text-gray-700 text-sm font-bold mb-2">Adınız:</label>
+            <input type="text" id="username" name="username" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Lütfen adınızı girin">
+        </div>
+
+        <p id="best-score" class="text-center text-sm text-gray-600 mb-4"></p>
+        <p id="local-best-score" class="text-center text-sm text-gray-600 mb-4"></p>
+
+        <div id="questions" class="mb-4"></div>
+
+        <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Gönder</button>
+    </div>
+</form>
+
+    <div id="result">
+        <h2 class="text-center text-2xl font-semibold mt-10">Sonuçlar</h2>
+        <div class="container mx-auto p-6 bg-white rounded-lg shadow-md max-w-2xl mt-4">
+            <p class="text-center text-xl font-semibold">Tebrikler <span id="name"></span> , Puanınız: <span id="result_score">0</span>!</p>
+            <div class="text-center">
+                <button onclick="location.reload()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4">Yeniden Başla</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+    <footer class="bg-gray-800 text-white py-4 mt-10">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2025 Python Quiz. <a class="text-cyan-600" href="https://github.com/CeroWalker">Celal</a> tarafından geliştirildi</p>
+        </div>
+    </footer>
+</body>
+
+</html>
